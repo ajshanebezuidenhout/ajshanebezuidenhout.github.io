@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zelme — Valentine?</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Consolas', monospace;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #0b132b, #0f3d3d, #1f6f55, #2fa65f);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== GENTLE RAIN ===== */
+#rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.drop {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: rgba(255,255,255,0.4);
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+}
+
+/* softer floating hearts (nature vibe) */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.35;
+    animation: float 8s linear infinite;
+    z-index: 2;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+    50% { opacity: 0.35; }
+    100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+}
+
+.screen {
+    display: none;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+}
+
+.active {
+    display: flex;
+}
+
+h1, h2 {
+    color: #e6fff0;
+    text-shadow: 0 0 6px #1f6f55;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: 1px solid #9ee8c0;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #e6fff0;
+}
+
+/* VALENTINE AREA */
+#valentineBox {
+    position: relative;
+    width: 450px;
+    height: 180px;
+}
+
+#yesBtn {
+    position: absolute;
+    left: 80px;
+    top: 60px;
+}
+
+#noBtn {
+    position: absolute;
+    left: 260px;
+    top: 60px;
+    color: #bbbbbb;
+    border-color: #bbbbbb;
+}
+
+#finalMessage {
+    display: none;
+    font-size: 28px;
+    color: #e6fff0;
+}
+
+/* SAD WRONG SCREEN */
+#wrong {
+    background: radial-gradient(circle, #666 0%, #444 40%, #111 100%);
+    animation: gloom 3s ease-in-out infinite alternate;
+    box-shadow: inset 0 0 200px black;
+}
+
+@keyframes gloom {
+    from { filter: brightness(0.9); }
+    to { filter: brightness(0.6); }
+}
+
+#wrong h1 { color: #ddd; }
+#wrong h2 { color: #aaa; }
+#crack { font-size: 160px; }
+</style>
+</head>
+
+<body>
+
+<div id="rain"></div>
+
+<script>
+// CREATE GENTLE RAIN
+const rain = document.getElementById("rain");
+for (let i = 0; i < 120; i++) {
+    let d = document.createElement("div");
+    d.className = "drop";
+    d.style.left = Math.random() * 100 + "vw";
+    d.style.animationDuration = (1.5 + Math.random() * 2) + "s";
+    d.style.opacity = Math.random() * 0.5;
+    rain.appendChild(d);
+}
+
+// floating hearts
+for (let i = 0; i < 25; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💚";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (6 + Math.random() * 4) + "s";
+    document.body.appendChild(h);
+}
+</script>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+<h1>Hey Zelme 💚</h1>
+<h2>Before I ask you something important… let’s play a little memory challenge.</h2>
+<button onclick="go(2)">Initialize</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+<h2>Question 1: Where did we first really talk?</h2>
+<button onclick="check(1,'School')">School</button>
+<button onclick="check(1,'Online')">Online</button>
+<button onclick="check(1,'Party')">At a party</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+<h2>Question 2: What made you smile the most?</h2>
+<button onclick="check(2,'Jokes')">Your jokes</button>
+<button onclick="check(2,'Kindness')">Your kindness</button>
+<button onclick="check(2,'Chaos')">Your chaos 😆</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+<h2>Last one, Zelme…</h2>
+<h2>Do you think I care about you?</h2>
+<button onclick="go(5)">Definitely</button>
+<button onclick="go(5)">Obviously</button>
+<button onclick="go(5)">100% yes</button>
+</div>
+
+<!-- WRONG SCREEN -->
+<div class="screen" id="wrong">
+<div id="crack">💔</div>
+<h1>EK SIEN HOE DIT IS</h1>
+<h2>…that answer hurt.</h2>
+</div>
+
+<!-- VALENTINE SCREEN -->
+<div class="screen" id="s5">
+<h1>Zelme… will you be my Valentine? 💚</h1>
+
+<div id="valentineBox">
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+</div>
+
+<div id="finalMessage">
+SYSTEM SUCCESS 💚  
+ZELME SAID YES  
+YOU JUST MADE MY YEAR
+</div>
+</div>
+
+<script>
+function go(num) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById("s" + num).classList.add("active");
+}
+
+function wrong() {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById("wrong").classList.add("active");
+}
+
+// Correct answers logic
+function check(q, ans) {
+    if (q === 1 && ans === "Online") go(3);
+    else if (q === 2 && (ans === "Jokes" || ans === "Chaos")) go(4);
+    else wrong();
+}
+
+const noBtn = document.getElementById("noBtn");
+const box = document.getElementById("valentineBox");
+const yesBtn = document.getElementById("yesBtn");
+const finalMessage = document.getElementById("finalMessage");
+
+// runaway No button
+box.addEventListener("mousemove", function(e) {
+    const rect = noBtn.getBoundingClientRect();
+    const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+    );
+
+    if (distance < 120) {
+        const x = Math.random() * (box.offsetWidth - 140);
+        const y = Math.random() * (box.offsetHeight - 70);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+});
+
+yesBtn.addEventListener("click", function() {
+    document.querySelector("#s5 h1").style.display = "none";
+    document.getElementById("valentineBox").style.display = "none";
+    finalMessage.style.display = "block";
+});
+</script>
+
+</body>
+</html>
