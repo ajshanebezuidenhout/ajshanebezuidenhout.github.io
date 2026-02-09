@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="af">
 <head>
 <meta charset="UTF-8">
-<title>Zelme — Valentine?</title>
+<title>Zelme — Valentyn?</title>
 
 <style>
 body {
@@ -11,7 +11,7 @@ body {
     font-family: 'Consolas', monospace;
     text-align: center;
     overflow: hidden;
-    background: linear-gradient(-45deg, #0b132b, #0f3d3d, #1f6f55, #2fa65f);
+    background: linear-gradient(-45deg, #0b132b, #145a32, #1f6f55, #2fa65f);
     background-size: 400% 400%;
     animation: bgMove 12s ease infinite;
 }
@@ -46,7 +46,7 @@ body {
     to { transform: translateY(110vh); }
 }
 
-/* softer floating hearts (nature vibe) */
+/* floating hearts */
 .heart {
     position: absolute;
     font-size: 20px;
@@ -165,56 +165,56 @@ for (let i = 0; i < 25; i++) {
 
 <!-- SCREEN 1 -->
 <div class="screen active" id="s1">
-<h1>Hey Zelme 💚</h1>
-<h2>Before I ask you something important… let’s play a little memory challenge.</h2>
-<button onclick="go(2)">Initialize</button>
+<h1>Hallo Zelme 💚</h1>
+<h2>Voor ek iets belangrik vra… speel ons eers ’n kort geheue-speletjie.</h2>
+<button onclick="go(2)">Begin</button>
 </div>
 
 <!-- SCREEN 2 -->
 <div class="screen" id="s2">
-<h2>Question 1: Where did we first really talk?</h2>
-<button onclick="check(1,'School')">School</button>
-<button onclick="check(1,'Online')">Online</button>
-<button onclick="check(1,'Party')">At a party</button>
+<h2>Vraag 1: Waar het ons eerste regtig gesels?</h2>
+<button onclick="check(1,'Skool')">By die skool</button>
+<button onclick="check(1,'Aanlyn')">Aanlyn</button>
+<button onclick="check(1,'Partytjie')">By ’n partytjie</button>
 </div>
 
 <!-- SCREEN 3 -->
 <div class="screen" id="s3">
-<h2>Question 2: What made you smile the most?</h2>
-<button onclick="check(2,'Jokes')">Your jokes</button>
-<button onclick="check(2,'Kindness')">Your kindness</button>
-<button onclick="check(2,'Chaos')">Your chaos 😆</button>
+<h2>Vraag 2: Wat het jou die meeste laat glimlag?</h2>
+<button onclick="go(4)">Jou grappies</button>
+<button onclick="go(4)">Jou goedhartigheid</button>
+<button onclick="go(4)">Jou chaos 😆</button>
 </div>
 
 <!-- SCREEN 4 -->
 <div class="screen" id="s4">
-<h2>Last one, Zelme…</h2>
-<h2>Do you think I care about you?</h2>
-<button onclick="go(5)">Definitely</button>
-<button onclick="go(5)">Obviously</button>
-<button onclick="go(5)">100% yes</button>
+<h2>Laaste vraag, Zelme…</h2>
+<h2>Dink jy ek gee vir jou om?</h2>
+<button onclick="go(5)">Beslis</button>
+<button onclick="go(5)">Natuurlik</button>
+<button onclick="go(5)">100% ja</button>
 </div>
 
 <!-- WRONG SCREEN -->
 <div class="screen" id="wrong">
 <div id="crack">💔</div>
 <h1>EK SIEN HOE DIT IS</h1>
-<h2>…that answer hurt.</h2>
+<h2>…daardie antwoord het seergemaak.</h2>
 </div>
 
 <!-- VALENTINE SCREEN -->
 <div class="screen" id="s5">
-<h1>Zelme… will you be my Valentine? 💚</h1>
+<h1>Zelme… sal jy my Valentyn wees? 💚</h1>
 
 <div id="valentineBox">
-    <button id="yesBtn">YES</button>
-    <button id="noBtn">NO</button>
+    <button id="yesBtn">JA</button>
+    <button id="noBtn">NEE</button>
 </div>
 
 <div id="finalMessage">
-SYSTEM SUCCESS 💚  
-ZELME SAID YES  
-YOU JUST MADE MY YEAR
+STELSEL SUKSES 💚  
+ZELME HET JA GESÊ  
+JY HET MY HELE JAAR GEMAAK
 </div>
 </div>
 
@@ -231,8 +231,7 @@ function wrong() {
 
 // Correct answers logic
 function check(q, ans) {
-    if (q === 1 && ans === "Online") go(3);
-    else if (q === 2 && (ans === "Jokes" || ans === "Chaos")) go(4);
+    if (q === 1 && ans === "Aanlyn") go(3);
     else wrong();
 }
 
