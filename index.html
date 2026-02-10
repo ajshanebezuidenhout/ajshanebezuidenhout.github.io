@@ -1,267 +1,773 @@
 <!DOCTYPE html>
 <html lang="af">
 <head>
-<meta charset="UTF-8">
-<title>Zelme — Valentyn?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ons Tyd Saam | Herinnerings Galery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Consolas', monospace;
-    text-align: center;
-    overflow: hidden;
-    background: linear-gradient(-45deg, #0b132b, #145a32, #1f6f55, #2fa65f);
-    background-size: 400% 400%;
-    animation: bgMove 12s ease infinite;
-}
+        :root {
+            --rose-light: #FFE8E8;
+            --rose-medium: #FFC2C2;
+            --rose-dark: #FF8E8E;
+            --cream: #FFF5E6;
+            --gold: #FFD166;
+            --chocolate: #8B5A2B;
+            --shadow: rgba(255, 142, 142, 0.15);
+            --text: #5D4037;
+        }
 
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        body {
+            background-color: var(--cream);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 226, 226, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 194, 194, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 214, 102, 0.1) 0%, transparent 30%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+        }
 
-/* ===== GENTLE RAIN ===== */
-#rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            width: 100%;
+        }
 
-.drop {
-    position: absolute;
-    width: 2px;
-    height: 15px;
-    background: rgba(255,255,255,0.4);
-    animation: fall linear infinite;
-}
+        /* Kopstyl */
+        header {
+            text-align: center;
+            padding: 30px 15px 20px;
+            position: relative;
+        }
 
-@keyframes fall {
-    from { transform: translateY(-10vh); }
-    to { transform: translateY(110vh); }
-}
+        .header-content {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
 
-/* floating hearts */
-.heart {
-    position: absolute;
-    font-size: 20px;
-    opacity: 0.35;
-    animation: float 8s linear infinite;
-    z-index: 2;
-}
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--rose-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
 
-@keyframes float {
-    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-    50% { opacity: 0.35; }
-    100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
-}
+        .main-title::before, .main-title::after {
+            content: '♥';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--rose-medium);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            animation: float 3s infinite ease-in-out;
+        }
 
-.screen {
-    display: none;
-    height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 3;
-}
+        .main-title::before {
+            left: clamp(-30px, -5vw, -40px);
+            animation-delay: 0.5s;
+        }
 
-.active {
-    display: flex;
-}
+        .main-title::after {
+            right: clamp(-30px, -5vw, -40px);
+            animation-delay: 1s;
+        }
 
-h1, h2 {
-    color: #e6fff0;
-    text-shadow: 0 0 6px #1f6f55;
-}
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            color: var(--chocolate);
+            font-style: italic;
+            margin-top: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+            position: relative;
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
 
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    border: 1px solid #9ee8c0;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-    background: rgba(0, 0, 0, 0.65);
-    color: #e6fff0;
-}
+        .subtitle::before {
+            content: "“";
+            position: absolute;
+            left: 5px;
+            top: 0;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            color: var(--rose-medium);
+            font-family: serif;
+        }
 
-/* VALENTINE AREA */
-#valentineBox {
-    position: relative;
-    width: 450px;
-    height: 180px;
-}
+        .subtitle::after {
+            content: "”";
+            position: absolute;
+            right: 5px;
+            bottom: -15px;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            color: var(--rose-medium);
+            font-family: serif;
+        }
 
-#yesBtn {
-    position: absolute;
-    left: 80px;
-    top: 60px;
-}
+        /* Swewende hartjies agtergrond */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-#noBtn {
-    position: absolute;
-    left: 260px;
-    top: 60px;
-    color: #bbbbbb;
-    border-color: #bbbbbb;
-}
+        .heart {
+            position: absolute;
+            color: var(--rose-medium);
+            opacity: 0.3;
+            font-size: 1rem;
+            animation: float 6s infinite ease-in-out;
+        }
 
-#finalMessage {
-    display: none;
-    font-size: 28px;
-    color: #e6fff0;
-}
+        /* Galery Navigasie */
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 0 10px;
+        }
 
-/* SAD WRONG SCREEN */
-#wrong {
-    background: radial-gradient(circle, #666 0%, #444 40%, #111 100%);
-    animation: gloom 3s ease-in-out infinite alternate;
-    box-shadow: inset 0 0 200px black;
-}
+        .nav-btn {
+            background: linear-gradient(135deg, var(--rose-medium), var(--rose-dark));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+        }
 
-@keyframes gloom {
-    from { filter: brightness(0.9); }
-    to { filter: brightness(0.6); }
-}
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
 
-#wrong h1 { color: #ddd; }
-#wrong h2 { color: #aaa; }
-#crack { font-size: 160px; }
-</style>
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+            background: linear-gradient(135deg, var(--rose-dark), #ff7a7a);
+        }
+
+        .nav-btn i {
+            margin-right: 6px;
+        }
+
+        /* Galery Houer */
+        .gallery-container {
+            margin: 20px 0;
+            min-height: 400px;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .gallery {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .gallery.active {
+            display: grid;
+        }
+
+        /* Polaroid Galery - Reageer */
+        #polaroid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 15px;
+        }
+
+        /* Collage Galery - Reageer */
+        #collage {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        /* Galery Item Styl - Vereenvoudig */
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            background-color: white;
+            width: 100%;
+            height: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* Pas hoogte aan vir kleiner skerms */
+        @media (max-width: 768px) {
+            .gallery-item {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                height: 220px;
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Polaroid Spesifieke Styl - Reageer */
+        .polaroid-item {
+            background: white;
+            padding: 15px 15px 50px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .polaroid-item::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 6px;
+            background-color: var(--gold);
+            border-radius: 3px;
+        }
+
+        /* Verwyder rotasie op mobiel vir beter sig */
+        @media (min-width: 768px) {
+            .polaroid-item:nth-child(odd) {
+                transform: rotate(2deg);
+            }
+            
+            .polaroid-item:nth-child(even) {
+                transform: rotate(-1deg);
+            }
+            
+            .polaroid-item:nth-child(odd):hover {
+                transform: rotate(2deg) scale(1.02);
+            }
+            
+            .polaroid-item:nth-child(even):hover {
+                transform: rotate(-1deg) scale(1.02);
+            }
+        }
+
+        /* Collage Spesifieke Styl - Reageer */
+        .collage-item {
+            border: 6px solid white;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Op mobiel, al collage items het dieselfde hoogte */
+        @media (max-width: 768px) {
+            .collage-item {
+                height: 250px !important;
+            }
+        }
+
+        /* Op rekenaar, verskillende hoogtes vir collage effek */
+        @media (min-width: 769px) {
+            .collage-item:nth-child(1) {
+                height: 320px;
+                border-color: var(--rose-light);
+            }
+
+            .collage-item:nth-child(2) {
+                height: 280px;
+                border-color: var(--gold);
+            }
+
+            .collage-item:nth-child(3) {
+                height: 280px;
+                border-color: var(--rose-medium);
+            }
+
+            .collage-item:nth-child(4) {
+                height: 320px;
+                border-color: var(--cream);
+            }
+        }
+
+        /* Voetnota */
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 194, 194, 0.3);
+            color: var(--chocolate);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--rose-medium), transparent);
+        }
+
+        .footer-heart {
+            color: var(--rose-dark);
+            animation: heartbeat 1.2s infinite;
+            font-size: 1.3rem;
+            margin: 0 4px;
+        }
+
+        footer p {
+            margin: 8px 0;
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        .footer-quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: var(--rose-dark);
+            margin-top: 10px;
+        }
+
+        /* Modal vir volskerm beelde - Mobiel Geoptimaliseer */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(139, 90, 43, 0.97);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease;
+            padding: 15px;
+        }
+
+        .modal-content {
+            max-width: 100%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 5px solid white;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: var(--rose-light);
+            transform: rotate(90deg);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Raakvriendelike modal vir mobiel */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-height: 80%;
+                border-width: 3px;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 15px;
+                font-size: 2.2rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Animasies */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.3); }
+            10% { transform: scale(1.1); }
+            15% { transform: scale(1.4); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes zoomOut {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(0.8); opacity: 0; }
+        }
+
+        /* Mobiel-spesifieke aanpassings */
+        @media (max-width: 768px) {
+            /* Stapel navigasieknoppies vertikaal */
+            .gallery-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 90%;
+                max-width: 280px;
+            }
+            
+            /* Verminder gapings op mobiel */
+            #polaroid, #collage {
+                gap: 20px;
+            }
+            
+            /* Versteek hartjies op baie klein skerms om rommel te verminder */
+            @media (max-width: 480px) {
+                .heart {
+                    display: none;
+                }
+                
+                .main-title::before, .main-title::after {
+                    display: none;
+                }
+            }
+        }
+
+        /* Tablet-aanpassings */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 20px;
+            }
+            
+            #polaroid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #collage {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Groot rekenaar aanpassings */
+        @media (min-width: 1025px) {
+            #polaroid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            
+            #collage {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <!-- Swewende hartjies agtergrond -->
+        <div class="floating-hearts" id="floatingHearts"></div>
+        
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">Ons Tyd Saam</h1>
+                <p class="subtitle">Vier kosbare oomblikke wat ons liefdesverhaal vertel</p>
+            </div>
+        </header>
 
-<div id="rain"></div>
+        <div class="gallery-nav">
+            <button class="nav-btn active" data-gallery="polaroid"><i class="fas fa-camera-retro"></i> Polaroid Styl</button>
+            <button class="nav-btn" data-gallery="collage"><i class="fas fa-heart"></i> Collage Styl</button>
+        </div>
 
-<script>
-// CREATE GENTLE RAIN
-const rain = document.getElementById("rain");
-for (let i = 0; i < 120; i++) {
-    let d = document.createElement("div");
-    d.className = "drop";
-    d.style.left = Math.random() * 100 + "vw";
-    d.style.animationDuration = (1.5 + Math.random() * 2) + "s";
-    d.style.opacity = Math.random() * 0.5;
-    rain.appendChild(d);
-}
+        <div class="gallery-container">
+            <!-- Polaroid Styl Galery -->
+            <div id="polaroid" class="gallery active">
+                <!-- Items sal deur JavaScript bygevoeg word -->
+            </div>
 
-// floating hearts
-for (let i = 0; i < 25; i++) {
-    let h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "💚";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = (6 + Math.random() * 4) + "s";
-    document.body.appendChild(h);
-}
-</script>
+            <!-- Foto Collage Galery -->
+            <div id="collage" class="gallery">
+                <!-- Items sal deur JavaScript bygevoeg word -->
+            </div>
+        </div>
 
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-<h1>Hallo Zelme 💚</h1>
-<h2>Voor ek iets belangrik vra… speel ons eers ’n kort geheue-speletjie.</h2>
-<button onclick="go(2)">Begin</button>
-</div>
+        <footer>
+            <p>Gemaak met <span class="footer-heart"><i class="fas fa-heart"></i></span> om ons oomblikke te koester</p>
+            <p class="footer-quote">Elke oomblik saam met jou is kosbaar</p>
+        </footer>
+    </div>
 
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-<h2>Vraag 1: Waar het ons eerste regtig gesels?</h2>
-<button onclick="check(1,'Skool')">By die skool</button>
-<button onclick="check(1,'Aanlyn')">Aanlyn</button>
-<button onclick="check(1,'Partytjie')">By ’n partytjie</button>
-</div>
+    <!-- Modal vir volskerm beeldbesigtiging -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-<h2>Vraag 2: Wat het jou die meeste laat glimlag?</h2>
-<button onclick="go(4)">Jou grappies</button>
-<button onclick="go(4)">Jou goedhartigheid</button>
-<button onclick="go(4)">Jou chaos 😆</button>
-</div>
+    <script>
+        // Jou vier voorsiene beelde
+        const images = [
+            { 
+                id: 1, 
+                src: "https://iili.io/fyoMWdJ.png"
+            },
+            { 
+                id: 2, 
+                src: "https://iili.io/fyoEPaf.jpg"
+            },
+            { 
+                id: 3, 
+                src: "https://iili.io/fyoG7nt.jpg"
+            },
+            { 
+                id: 4, 
+                src: "https://iili.io/fyoGyxI.jpg"
+            }
+        ];
 
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-<h2>Laaste vraag, Zelme…</h2>
-<h2>Dink jy ek gee vir jou om?</h2>
-<button onclick="go(5)">Beslis</button>
-<button onclick="go(5)">Natuurlik</button>
-<button onclick="go(5)">100% ja</button>
-</div>
+        // Skep swewende hartjies - minder op mobiel
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const isMobile = window.innerWidth <= 768;
+            const heartCount = isMobile ? 8 : 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '♥';
+                
+                // Lukrake posisionering en animasie
+                const size = Math.random() * (isMobile ? 15 : 20) + (isMobile ? 8 : 10);
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                
+                heart.style.left = `${left}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${size}px`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.opacity = Math.random() * 0.4 + 0.1;
+                
+                container.appendChild(heart);
+            }
+        }
 
-<!-- WRONG SCREEN -->
-<div class="screen" id="wrong">
-<div id="crack">💔</div>
-<h1>EK SIEN HOE DIT IS</h1>
-<h2>…daardie antwoord het seergemaak.</h2>
-</div>
+        // Galery navigasie funksionaliteit
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const galleries = document.querySelectorAll('.gallery');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Opdateer aktiewe knoppie
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Wys gekose galery
+                const galleryId = button.getAttribute('data-gallery');
+                galleries.forEach(gallery => {
+                    gallery.classList.remove('active');
+                    if (gallery.id === galleryId) {
+                        gallery.classList.add('active');
+                    }
+                });
+                
+                // Vul galery as dit leeg is
+                populateGallery(galleryId);
+            });
+        });
 
-<!-- VALENTINE SCREEN -->
-<div class="screen" id="s5">
-<h1>Zelme… sal jy my Valentyn wees? 💚</h1>
+        // Vul galery met beelde
+        function populateGallery(galleryId) {
+            const gallery = document.getElementById(galleryId);
+            
+            // Moenie hervul as dit reeds inhoud het nie
+            if (gallery.children.length > 0) return;
+            
+            // Skep verskillende uitlegte vir verskillende galerye
+            let itemsHtml = '';
+            
+            if (galleryId === 'polaroid') {
+                // Polaroid styl
+                images.forEach((image, index) => {
+                    itemsHtml += `
+                        <div class="gallery-item polaroid-item" data-id="${image.id}">
+                            <img src="${image.src}" alt="Ons herinnering ${image.id}" loading="lazy">
+                        </div>
+                    `;
+                });
+            } else if (galleryId === 'collage') {
+                // Collage styl
+                images.forEach((image, index) => {
+                    itemsHtml += `
+                        <div class="gallery-item collage-item" data-id="${image.id}">
+                            <img src="${image.src}" alt="Ons herinnering ${image.id}" loading="lazy">
+                        </div>
+                    `;
+                });
+            }
+            
+            gallery.innerHTML = itemsHtml;
+            
+            // Voeg klikgebeurtenis by galery items vir modalbesigtiging
+            const galleryItems = gallery.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.querySelector('img').src;
+                    openModal(imgSrc);
+                });
+            });
+        }
 
-<div id="valentineBox">
-    <button id="yesBtn">JA</button>
-    <button id="noBtn">NEE</button>
-</div>
+        // Modal funksionaliteit
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        let isClosing = false;
 
-<div id="finalMessage">
-STELSEL SUKSES 💚  
-ZELME HET JA GESÊ  
-JY HET MY HELE JAAR GEMAAK
-</div>
-</div>
+        function openModal(imgSrc) {
+            if (isClosing) return;
+            
+            modal.style.display = 'flex';
+            modalImage.src = imgSrc;
+            
+            // Reset animasie
+            modalImage.style.animation = 'zoomIn 0.3s ease';
+            
+            // Voorkom liggaamsrol wanneer modal oop is
+            document.body.style.overflow = 'hidden';
+        }
 
-<script>
-function go(num) {
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    document.getElementById("s" + num).classList.add("active");
-}
+        function closeModalFunc() {
+            if (isClosing) return;
+            
+            isClosing = true;
+            
+            // Voeg zoom-out animasie toe
+            modalImage.style.animation = 'zoomOut 0.2s ease';
+            
+            // Wag vir animasie om te voltooi voor sluiting
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                isClosing = false;
+            }, 200);
+        }
 
-function wrong() {
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    document.getElementById("wrong").classList.add("active");
-}
+        closeModal.addEventListener('click', closeModalFunc);
 
-// Correct answers logic
-function check(q, ans) {
-    if (q === 1 && ans === "Aanlyn") go(3);
-    else wrong();
-}
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
 
-const noBtn = document.getElementById("noBtn");
-const box = document.getElementById("valentineBox");
-const yesBtn = document.getElementById("yesBtn");
-const finalMessage = document.getElementById("finalMessage");
+        // Sluit modal met escape-sleutel
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModalFunc();
+            }
+        });
 
-// runaway No button
-box.addEventListener("mousemove", function(e) {
-    const rect = noBtn.getBoundingClientRect();
-    const distance = Math.hypot(
-        e.clientX - (rect.left + rect.width / 2),
-        e.clientY - (rect.top + rect.height / 2)
-    );
-
-    if (distance < 120) {
-        const x = Math.random() * (box.offsetWidth - 140);
-        const y = Math.random() * (box.offsetHeight - 70);
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    }
-});
-
-yesBtn.addEventListener("click", function() {
-    document.querySelector("#s5 h1").style.display = "none";
-    document.getElementById("valentineBox").style.display = "none";
-    finalMessage.style.display = "block";
-});
-</script>
-
+        // Inisialiseer
+        createFloatingHearts();
+        populateGallery('polaroid');
+        
+        // Herskep hartjies op venstergrootte (met debounce)
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                document.getElementById('floatingHearts').innerHTML = '';
+                createFloatingHearts();
+            }, 250);
+        });
+        
+        // Voeg 'n romantiese boodskap by op laai
+        window.addEventListener('load', () => {
+            console.log('%c❤️ Welkom by "Ons Tyd Saam" ❤️', 'color: #FF8E8E; font-size: 16px; font-weight: bold;');
+            console.log('%c\'n Viering van liefde en gekoesterde oomblikke', 'color: #8B5A2B; font-size: 14px;');
+        });
+    </script>
 </body>
 </html>
